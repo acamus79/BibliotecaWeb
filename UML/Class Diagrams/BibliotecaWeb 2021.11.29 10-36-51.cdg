@@ -2,7 +2,7 @@
 
 <ClassDiagram name="BibliotecaWeb">
   <ClassDiagramComponents>
-    <Class name="BibliotecaApplication" package="com.mza.biblioteca" visibility="public" xPosition="34.0" yPosition="20.0">
+    <Class name="BibliotecaApplication" package="com.mza.biblioteca" visibility="public" xPosition="20.0" yPosition="20.0">
       <Fields>
         <Field name="sUsuario" type="UsuarioService" visibility="private"/>
       </Fields>
@@ -16,7 +16,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="ConfiguracionesSeguridad" package="com.mza.biblioteca.configuraciones" visibility="public" xPosition="397.0" yPosition="20.0">
+    <Class name="ConfiguracionesSeguridad" package="com.mza.biblioteca.configuraciones" visibility="public" xPosition="320.0" yPosition="20.0">
       <Fields/>
       <Constructors/>
       <Methods>
@@ -473,6 +473,12 @@
         </Method>
       </Methods>
     </Class>
+    <Enum name="Rol" package="com.mza.biblioteca.enumeradores" visibility="public" xPosition="2120.0" yPosition="420.0">
+      <Literals>
+        <Literal name="ADMIN"/>
+        <Literal name="USUARIO"/>
+      </Literals>
+    </Enum>
     <Class name="MiExcepcion" package="com.mza.biblioteca.excepciones" visibility="public" xPosition="20.0" yPosition="820.0">
       <Fields/>
       <Constructors>
@@ -483,7 +489,54 @@
       </Constructors>
       <Methods/>
     </Class>
-    <Class name="AutorService" package="com.mza.biblioteca.servicios" visibility="public" xPosition="1446.0" yPosition="947.0">
+    <Interface name="RepoAutor" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="320.0" yPosition="820.0">
+      <Methods>
+        <Method name="buscaPorNombre" returnType="List&lt;Autor&gt;" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="buscaActivos" returnType="List&lt;Autor&gt;" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Interface name="RepoEditorial" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="620.0" yPosition="820.0">
+      <Methods>
+        <Method name="buscaPorNombre" returnType="Editorial" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="buscaActivos" returnType="List&lt;Editorial&gt;" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Interface name="RepoLibro" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="920.0" yPosition="820.0">
+      <Methods>
+        <Method name="buscaActivos" returnType="List&lt;Libro&gt;" visibility="package">
+          <Argument type="String" name="buscar"/>
+        </Method>
+        <Method name="buscaTodo" returnType="List&lt;Libro&gt;" visibility="package">
+          <Argument type="String" name="buscar"/>
+        </Method>
+        <Method name="listaActivos" returnType="List&lt;Libro&gt;" visibility="package"/>
+        <Method name="validaISBN" returnType="Optional&lt;Libro&gt;" visibility="package">
+          <Argument type="String" name="isbn"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="RepoPortada" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="1220.0" yPosition="820.0">
+      <Methods/>
+    </Interface>
+    <Interface name="RepoPrestamo" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="1520.0" yPosition="820.0">
+      <Methods/>
+    </Interface>
+    <Interface name="RepoUsuario" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="1820.0" yPosition="820.0">
+      <Methods>
+        <Method name="buscarPorMail" returnType="Usuario" visibility="public">
+          <Argument type="String" name="mail"/>
+        </Method>
+        <Method name="validaMail" returnType="Optional&lt;Usuario&gt;" visibility="public">
+          <Argument type="String" name="mail"/>
+        </Method>
+        <Method name="buscaActivos" returnType="List&lt;Usuario&gt;" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Class name="AutorService" package="com.mza.biblioteca.servicios" visibility="public" xPosition="2120.0" yPosition="820.0">
       <Fields>
         <Field name="aRepo" type="RepoAutor" visibility="private"/>
       </Fields>
@@ -603,7 +656,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="PrestamoService" package="com.mza.biblioteca.servicios" visibility="public" xPosition="1101.0" yPosition="1239.0">
+    <Class name="PrestamoService" package="com.mza.biblioteca.servicios" visibility="public" xPosition="920.0" yPosition="1220.0">
       <Fields>
         <Field name="sLibro" type="LibroService" visibility="package"/>
         <Field name="sUsuario" type="UsuarioService" visibility="package"/>
@@ -626,7 +679,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="UsuarioService" package="com.mza.biblioteca.servicios" visibility="public" xPosition="34.0" yPosition="217.0">
+    <Class name="UsuarioService" package="com.mza.biblioteca.servicios" visibility="public" xPosition="1220.0" yPosition="1220.0">
       <Fields>
         <Field name="rUsuario" type="RepoUsuario" visibility="package"/>
         <Field name="sFoto" type="PortadaService" visibility="package"/>
@@ -674,7 +727,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="ListaLibrosPDF" package="com.mza.biblioteca.util" visibility="public" xPosition="1520.0" yPosition="1239.0">
+    <Class name="ListaLibrosPDF" package="com.mza.biblioteca.util" visibility="public" xPosition="1520.0" yPosition="1220.0">
       <Fields/>
       <Constructors/>
       <Methods>
@@ -687,7 +740,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="ReciboPrestamoPDF" package="com.mza.biblioteca.util" visibility="public" xPosition="1520.0" yPosition="1371.0">
+    <Class name="ReciboPrestamoPDF" package="com.mza.biblioteca.util" visibility="public" xPosition="1820.0" yPosition="1220.0">
       <Fields/>
       <Constructors/>
       <Methods>
@@ -700,112 +753,59 @@
         </Method>
       </Methods>
     </Class>
-    <Interface name="RepoAutor" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="320.0" yPosition="820.0">
-      <Methods>
-        <Method name="buscaPorNombre" returnType="List&lt;Autor&gt;" visibility="public">
-          <Argument type="String" name="nombre"/>
-        </Method>
-        <Method name="buscaActivos" returnType="List&lt;Autor&gt;" visibility="public"/>
-      </Methods>
-    </Interface>
-    <Interface name="RepoEditorial" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="620.0" yPosition="820.0">
-      <Methods>
-        <Method name="buscaPorNombre" returnType="Editorial" visibility="public">
-          <Argument type="String" name="nombre"/>
-        </Method>
-        <Method name="buscaActivos" returnType="List&lt;Editorial&gt;" visibility="public"/>
-      </Methods>
-    </Interface>
-    <Interface name="RepoLibro" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="920.0" yPosition="820.0">
-      <Methods>
-        <Method name="buscaActivos" returnType="List&lt;Libro&gt;" visibility="package">
-          <Argument type="String" name="buscar"/>
-        </Method>
-        <Method name="buscaTodo" returnType="List&lt;Libro&gt;" visibility="package">
-          <Argument type="String" name="buscar"/>
-        </Method>
-        <Method name="listaActivos" returnType="List&lt;Libro&gt;" visibility="package"/>
-        <Method name="validaISBN" returnType="Optional&lt;Libro&gt;" visibility="package">
-          <Argument type="String" name="isbn"/>
-        </Method>
-      </Methods>
-    </Interface>
-    <Interface name="RepoPortada" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="1220.0" yPosition="820.0">
-      <Methods/>
-    </Interface>
-    <Interface name="RepoPrestamo" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="1520.0" yPosition="820.0">
-      <Methods/>
-    </Interface>
-    <Interface name="RepoUsuario" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="1820.0" yPosition="820.0">
-      <Methods>
-        <Method name="buscarPorMail" returnType="Usuario" visibility="public">
-          <Argument type="String" name="mail"/>
-        </Method>
-        <Method name="validaMail" returnType="Optional&lt;Usuario&gt;" visibility="public">
-          <Argument type="String" name="mail"/>
-        </Method>
-        <Method name="buscaActivos" returnType="List&lt;Usuario&gt;" visibility="public"/>
-      </Methods>
-    </Interface>
-    <Enum name="Rol" package="com.mza.biblioteca.enumeradores" visibility="public" xPosition="2205.0" yPosition="418.0">
-      <Literals>
-        <Literal name="ADMIN"/>
-        <Literal name="USUARIO"/>
-      </Literals>
-    </Enum>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <UseRelation source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Editorial" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="sLibro" source="com.mza.biblioteca.controladores.PortadaController" target="com.mza.biblioteca.servicios.LibroService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="rLibro" source="com.mza.biblioteca.servicios.LibroService" target="com.mza.biblioteca.repositorios.RepoLibro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sUsuario" source="com.mza.biblioteca.controladores.MainControlller" target="com.mza.biblioteca.servicios.UsuarioService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="autor" source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Autor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.servicios.EditorialService" target="com.mza.biblioteca.entidades.Editorial" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.servicios.LibroService" target="com.mza.biblioteca.entidades.Libro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.entidades.Usuario" target="com.mza.biblioteca.entidades.Prestamo" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sLibro" source="com.mza.biblioteca.controladores.LibroController" target="com.mza.biblioteca.servicios.LibroService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sEditorial" source="com.mza.biblioteca.controladores.LibroController" target="com.mza.biblioteca.servicios.EditorialService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.repositorios.RepoLibro" target="com.mza.biblioteca.entidades.Libro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sPrestamo" source="com.mza.biblioteca.controladores.PrestamoController" target="com.mza.biblioteca.servicios.PrestamoService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="usuario" source="com.mza.biblioteca.entidades.Prestamo" target="com.mza.biblioteca.entidades.Usuario" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="editorialServicio" source="com.mza.biblioteca.controladores.EditorialController" target="com.mza.biblioteca.servicios.EditorialService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sLibro" source="com.mza.biblioteca.controladores.PrestamoController" target="com.mza.biblioteca.servicios.LibroService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="com.mza.biblioteca.controladores.LibroController" target="com.mza.biblioteca.entidades.Libro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sLibro" source="com.mza.biblioteca.servicios.PrestamoService" target="com.mza.biblioteca.servicios.LibroService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.controladores.EditorialController" target="com.mza.biblioteca.entidades.Editorial" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sFoto" source="com.mza.biblioteca.servicios.UsuarioService" target="com.mza.biblioteca.servicios.PortadaService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sLibro" source="com.mza.biblioteca.controladores.PortadaController" target="com.mza.biblioteca.servicios.LibroService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sPortada" source="com.mza.biblioteca.servicios.LibroService" target="com.mza.biblioteca.servicios.PortadaService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="rUsuario" source="com.mza.biblioteca.servicios.PrestamoService" target="com.mza.biblioteca.repositorios.RepoUsuario" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sUsuario" source="com.mza.biblioteca.controladores.UsuarioController" target="com.mza.biblioteca.servicios.UsuarioService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.servicios.PortadaService" target="com.mza.biblioteca.entidades.Portada" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.entidades.Usuario" target="com.mza.biblioteca.enumeradores.Rol" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.entidades.Prestamo" target="com.mza.biblioteca.entidades.Usuario" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sEditorial" source="com.mza.biblioteca.servicios.LibroService" target="com.mza.biblioteca.servicios.EditorialService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sUsuario" source="com.mza.biblioteca.controladores.PrestamoController" target="com.mza.biblioteca.servicios.UsuarioService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.controladores.AutorController" target="com.mza.biblioteca.entidades.Autor" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="sUsuario" source="com.mza.biblioteca.servicios.PrestamoService" target="com.mza.biblioteca.servicios.UsuarioService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="com.mza.biblioteca.servicios.UsuarioService" target="com.mza.biblioteca.entidades.Usuario" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="aRepo" source="com.mza.biblioteca.servicios.AutorService" target="com.mza.biblioteca.repositorios.RepoAutor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="rPrestamo" source="com.mza.biblioteca.servicios.PrestamoService" target="com.mza.biblioteca.repositorios.RepoPrestamo" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.servicios.UsuarioService" target="com.mza.biblioteca.entidades.Usuario" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Editorial" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="rLibro" source="com.mza.biblioteca.servicios.LibroService" target="com.mza.biblioteca.repositorios.RepoLibro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="rUsuario" source="com.mza.biblioteca.servicios.UsuarioService" target="com.mza.biblioteca.repositorios.RepoUsuario" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="rol" source="com.mza.biblioteca.entidades.Usuario" target="com.mza.biblioteca.enumeradores.Rol" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.repositorios.RepoAutor" target="com.mza.biblioteca.entidades.Autor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.entidades.Prestamo" target="com.mza.biblioteca.entidades.Libro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sAutor" source="com.mza.biblioteca.controladores.LibroController" target="com.mza.biblioteca.servicios.AutorService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="editorial" source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Editorial" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="libro" source="com.mza.biblioteca.entidades.Prestamo" target="com.mza.biblioteca.entidades.Libro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="autorServicio" source="com.mza.biblioteca.controladores.AutorController" target="com.mza.biblioteca.servicios.AutorService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.repositorios.RepoEditorial" target="com.mza.biblioteca.entidades.Editorial" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="com.mza.biblioteca.repositorios.RepoUsuario" target="com.mza.biblioteca.entidades.Usuario" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="prestamos" source="com.mza.biblioteca.entidades.Usuario" target="com.mza.biblioteca.entidades.Prestamo" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Prestamo&gt;"/>
-    <HasRelation name="sFoto" source="com.mza.biblioteca.servicios.UsuarioService" target="com.mza.biblioteca.servicios.PortadaService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="com.mza.biblioteca.repositorios.RepoLibro" target="com.mza.biblioteca.entidades.Libro" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="eRepo" source="com.mza.biblioteca.servicios.EditorialService" target="com.mza.biblioteca.repositorios.RepoEditorial" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="sLibro" source="com.mza.biblioteca.controladores.PrestamoController" target="com.mza.biblioteca.servicios.LibroService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="sLibro" source="com.mza.biblioteca.controladores.LibroController" target="com.mza.biblioteca.servicios.LibroService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="sUsuario" source="com.mza.biblioteca.controladores.UsuarioController" target="com.mza.biblioteca.servicios.UsuarioService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="com.mza.biblioteca.entidades.Usuario" target="com.mza.biblioteca.entidades.Prestamo" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="com.mza.biblioteca.servicios.AutorService" target="com.mza.biblioteca.entidades.Autor" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="sUsuario" source="com.mza.biblioteca.BibliotecaApplication" target="com.mza.biblioteca.servicios.UsuarioService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="sEditorial" source="com.mza.biblioteca.servicios.LibroService" target="com.mza.biblioteca.servicios.EditorialService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Autor" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="autorServicio" source="com.mza.biblioteca.controladores.AutorController" target="com.mza.biblioteca.servicios.AutorService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="sUsuario" source="com.mza.biblioteca.controladores.PrestamoController" target="com.mza.biblioteca.servicios.UsuarioService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="com.mza.biblioteca.entidades.Prestamo" target="com.mza.biblioteca.entidades.Libro" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="sUsuario" source="com.mza.biblioteca.controladores.MainControlller" target="com.mza.biblioteca.servicios.UsuarioService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="sPrestamo" source="com.mza.biblioteca.controladores.PrestamoController" target="com.mza.biblioteca.servicios.PrestamoService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="sLibro" source="com.mza.biblioteca.servicios.PrestamoService" target="com.mza.biblioteca.servicios.LibroService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="rPortada" source="com.mza.biblioteca.servicios.PortadaService" target="com.mza.biblioteca.repositorios.RepoPortada" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="rUsuario" source="com.mza.biblioteca.servicios.UsuarioService" target="com.mza.biblioteca.repositorios.RepoUsuario" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="autor" source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Autor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="sEditorial" source="com.mza.biblioteca.controladores.LibroController" target="com.mza.biblioteca.servicios.EditorialService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="editorial" source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Editorial" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="com.mza.biblioteca.controladores.EditorialController" target="com.mza.biblioteca.entidades.Editorial" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="rol" source="com.mza.biblioteca.entidades.Usuario" target="com.mza.biblioteca.enumeradores.Rol" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="com.mza.biblioteca.servicios.PrestamoService" target="com.mza.biblioteca.entidades.Prestamo" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="com.mza.biblioteca.controladores.AutorController" target="com.mza.biblioteca.entidades.Autor" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="com.mza.biblioteca.repositorios.RepoAutor" target="com.mza.biblioteca.entidades.Autor" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="sAutor" source="com.mza.biblioteca.servicios.LibroService" target="com.mza.biblioteca.servicios.AutorService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="eRepo" source="com.mza.biblioteca.servicios.EditorialService" target="com.mza.biblioteca.repositorios.RepoEditorial" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="rPortada" source="com.mza.biblioteca.servicios.PortadaService" target="com.mza.biblioteca.repositorios.RepoPortada" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sUsuario" source="com.mza.biblioteca.BibliotecaApplication" target="com.mza.biblioteca.servicios.UsuarioService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="portada" source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Portada" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="editorialServicio" source="com.mza.biblioteca.controladores.EditorialController" target="com.mza.biblioteca.servicios.EditorialService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="com.mza.biblioteca.servicios.PortadaService" target="com.mza.biblioteca.entidades.Portada" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="com.mza.biblioteca.servicios.EditorialService" target="com.mza.biblioteca.entidades.Editorial" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="aRepo" source="com.mza.biblioteca.servicios.AutorService" target="com.mza.biblioteca.repositorios.RepoAutor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="com.mza.biblioteca.entidades.Prestamo" target="com.mza.biblioteca.entidades.Usuario" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="com.mza.biblioteca.servicios.LibroService" target="com.mza.biblioteca.entidades.Libro" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="usuario" source="com.mza.biblioteca.entidades.Prestamo" target="com.mza.biblioteca.entidades.Usuario" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="libro" source="com.mza.biblioteca.entidades.Prestamo" target="com.mza.biblioteca.entidades.Libro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="sAutor" source="com.mza.biblioteca.controladores.LibroController" target="com.mza.biblioteca.servicios.AutorService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="com.mza.biblioteca.entidades.Usuario" target="com.mza.biblioteca.enumeradores.Rol" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="rUsuario" source="com.mza.biblioteca.servicios.PrestamoService" target="com.mza.biblioteca.repositorios.RepoUsuario" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <UseRelation source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Portada" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="sPortada" source="com.mza.biblioteca.servicios.LibroService" target="com.mza.biblioteca.servicios.PortadaService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="com.mza.biblioteca.repositorios.RepoEditorial" target="com.mza.biblioteca.entidades.Editorial" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.servicios.AutorService" target="com.mza.biblioteca.entidades.Autor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sAutor" source="com.mza.biblioteca.servicios.LibroService" target="com.mza.biblioteca.servicios.AutorService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Autor" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>

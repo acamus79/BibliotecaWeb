@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="main.java.com.mza.biblioteca.entidades">
+  <ClassDiagramComponents>
+    <Class name="Autor" package="com.mza.biblioteca.entidades" visibility="public" xPosition="87.0" yPosition="632.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="alta" type="Boolean" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getId" returnType="String" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getAlta" returnType="Boolean" visibility="public"/>
+        <Method name="setAlta" returnType="void" visibility="public">
+          <Argument type="Boolean" name="alta"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Editorial" package="com.mza.biblioteca.entidades" visibility="public" xPosition="87.0" yPosition="342.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="alta" type="Boolean" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getId" returnType="String" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getAlta" returnType="Boolean" visibility="public"/>
+        <Method name="setAlta" returnType="void" visibility="public">
+          <Argument type="Boolean" name="alta"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Libro" package="com.mza.biblioteca.entidades" visibility="public" xPosition="373.0" yPosition="119.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="isbn" type="String" visibility="private"/>
+        <Field name="titulo" type="String" visibility="private"/>
+        <Field name="sinopsis" type="String" visibility="private"/>
+        <Field name="anio" type="Integer" visibility="private"/>
+        <Field name="ejemplares" type="Integer" visibility="private"/>
+        <Field name="ejemplaresPrestados" type="Integer" visibility="private"/>
+        <Field name="ejemplaresRestantes" type="Integer" visibility="private"/>
+        <Field name="alta" type="Boolean" visibility="private"/>
+        <Field name="autor" type="Autor" visibility="private"/>
+        <Field name="editorial" type="Editorial" visibility="private"/>
+        <Field name="portada" type="Portada" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getId" returnType="String" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="getIsbn" returnType="String" visibility="public"/>
+        <Method name="setIsbn" returnType="void" visibility="public">
+          <Argument type="String" name="isbn"/>
+        </Method>
+        <Method name="getTitulo" returnType="String" visibility="public"/>
+        <Method name="setTitulo" returnType="void" visibility="public">
+          <Argument type="String" name="titulo"/>
+        </Method>
+        <Method name="getAnio" returnType="Integer" visibility="public"/>
+        <Method name="setAnio" returnType="void" visibility="public">
+          <Argument type="Integer" name="anio"/>
+        </Method>
+        <Method name="getEjemplares" returnType="Integer" visibility="public"/>
+        <Method name="setEjemplares" returnType="void" visibility="public">
+          <Argument type="Integer" name="ejemplares"/>
+        </Method>
+        <Method name="getEjemplaresPrestados" returnType="Integer" visibility="public"/>
+        <Method name="setEjemplaresPrestados" returnType="void" visibility="public">
+          <Argument type="Integer" name="ejemplaresPrestados"/>
+        </Method>
+        <Method name="getEjemplaresRestantes" returnType="Integer" visibility="public"/>
+        <Method name="setEjemplaresRestantes" returnType="void" visibility="public">
+          <Argument type="Integer" name="ejemplaresRestantes"/>
+        </Method>
+        <Method name="getAlta" returnType="Boolean" visibility="public"/>
+        <Method name="setAlta" returnType="void" visibility="public">
+          <Argument type="Boolean" name="alta"/>
+        </Method>
+        <Method name="getAutor" returnType="Autor" visibility="public"/>
+        <Method name="setAutor" returnType="void" visibility="public">
+          <Argument type="Autor" name="autor"/>
+        </Method>
+        <Method name="getEditorial" returnType="Editorial" visibility="public"/>
+        <Method name="setEditorial" returnType="void" visibility="public">
+          <Argument type="Editorial" name="editorial"/>
+        </Method>
+        <Method name="getSinopsis" returnType="String" visibility="public"/>
+        <Method name="setSinopsis" returnType="void" visibility="public">
+          <Argument type="String" name="sinopsis"/>
+        </Method>
+        <Method name="getPortada" returnType="Portada" visibility="public"/>
+        <Method name="setPortada" returnType="void" visibility="public">
+          <Argument type="Portada" name="portada"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Portada" package="com.mza.biblioteca.entidades" visibility="public" xPosition="850.0" yPosition="119.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="mime" type="String" visibility="private"/>
+        <Field name="contenido" type="byte[]" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getId" returnType="String" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getMime" returnType="String" visibility="public"/>
+        <Method name="setMime" returnType="void" visibility="public">
+          <Argument type="String" name="mime"/>
+        </Method>
+        <Method name="getContenido" returnType="byte[]" visibility="public"/>
+        <Method name="setContenido" returnType="void" visibility="public">
+          <Argument type="byte[]" name="contenido"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Prestamo" package="com.mza.biblioteca.entidades" visibility="public" xPosition="843.0" yPosition="461.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="alta" type="Boolean" visibility="private"/>
+        <Field name="usuario" type="Usuario" visibility="private"/>
+        <Field name="libro" type="Libro" visibility="private"/>
+        <Field name="prestamo" type="Date" visibility="private"/>
+        <Field name="devolucion" type="Date" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getId" returnType="String" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="getAlta" returnType="Boolean" visibility="public"/>
+        <Method name="setAlta" returnType="void" visibility="public">
+          <Argument type="Boolean" name="alta"/>
+        </Method>
+        <Method name="getUsuario" returnType="Usuario" visibility="public"/>
+        <Method name="setUsuario" returnType="void" visibility="public">
+          <Argument type="Usuario" name="usuario"/>
+        </Method>
+        <Method name="getLibro" returnType="Libro" visibility="public"/>
+        <Method name="setLibro" returnType="void" visibility="public">
+          <Argument type="Libro" name="libro"/>
+        </Method>
+        <Method name="getPrestamo" returnType="Date" visibility="public"/>
+        <Method name="setPrestamo" returnType="void" visibility="public">
+          <Argument type="Date" name="prestamo"/>
+        </Method>
+        <Method name="getDevolucion" returnType="Date" visibility="public"/>
+        <Method name="setDevolucion" returnType="void" visibility="public">
+          <Argument type="Date" name="devolucion"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Usuario" package="com.mza.biblioteca.entidades" visibility="public" xPosition="1202.0" yPosition="233.0">
+      <Fields>
+        <Field name="id" type="String" visibility="private"/>
+        <Field name="alta" type="Date" visibility="private"/>
+        <Field name="baja" type="Date" visibility="private"/>
+        <Field name="rol" type="Rol" visibility="private"/>
+        <Field name="nombre" type="String" visibility="private"/>
+        <Field name="apellido" type="String" visibility="private"/>
+        <Field name="clave" type="String" visibility="private"/>
+        <Field name="cantidadPrestamos" type="Integer" visibility="private"/>
+        <Field name="mail" type="String" visibility="private"/>
+        <Field name="prestamos" type="List&lt;Prestamo&gt;" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="getId" returnType="String" visibility="public"/>
+        <Method name="setId" returnType="void" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="getNombre" returnType="String" visibility="public"/>
+        <Method name="setNombre" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="getApellido" returnType="String" visibility="public"/>
+        <Method name="setApellido" returnType="void" visibility="public">
+          <Argument type="String" name="apellido"/>
+        </Method>
+        <Method name="getClave" returnType="String" visibility="public"/>
+        <Method name="setClave" returnType="void" visibility="public">
+          <Argument type="String" name="clave"/>
+        </Method>
+        <Method name="getMail" returnType="String" visibility="public"/>
+        <Method name="setMail" returnType="void" visibility="public">
+          <Argument type="String" name="mail"/>
+        </Method>
+        <Method name="getAlta" returnType="Date" visibility="public"/>
+        <Method name="setAlta" returnType="void" visibility="public">
+          <Argument type="Date" name="alta"/>
+        </Method>
+        <Method name="getBaja" returnType="Date" visibility="public"/>
+        <Method name="setBaja" returnType="void" visibility="public">
+          <Argument type="Date" name="baja"/>
+        </Method>
+        <Method name="getRol" returnType="Rol" visibility="public"/>
+        <Method name="setRol" returnType="void" visibility="public">
+          <Argument type="Rol" name="rol"/>
+        </Method>
+        <Method name="getPrestamos" returnType="List&lt;Prestamo&gt;" visibility="public"/>
+        <Method name="setPrestamos" returnType="void" visibility="public">
+          <Argument type="List&lt;Prestamo&gt;" name="prestamos"/>
+        </Method>
+        <Method name="getCantidadPrestamos" returnType="Integer" visibility="public"/>
+        <Method name="setCantidadPrestamos" returnType="void" visibility="public">
+          <Argument type="Integer" name="cantidadPrestamos"/>
+        </Method>
+      </Methods>
+    </Class>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Editorial" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="portada" source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Portada" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="editorial" source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Editorial" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.entidades.Prestamo" target="com.mza.biblioteca.entidades.Usuario" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="usuario" source="com.mza.biblioteca.entidades.Prestamo" target="com.mza.biblioteca.entidades.Usuario" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="autor" source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Autor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="prestamos" source="com.mza.biblioteca.entidades.Usuario" target="com.mza.biblioteca.entidades.Prestamo" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;Prestamo&gt;"/>
+    <UseRelation source="com.mza.biblioteca.entidades.Usuario" target="com.mza.biblioteca.entidades.Prestamo" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.entidades.Prestamo" target="com.mza.biblioteca.entidades.Libro" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Portada" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.mza.biblioteca.entidades.Libro" target="com.mza.biblioteca.entidades.Autor" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="libro" source="com.mza.biblioteca.entidades.Prestamo" target="com.mza.biblioteca.entidades.Libro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

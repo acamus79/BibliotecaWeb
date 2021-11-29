@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="Multi-package class diagram">
+  <ClassDiagramComponents>
+    <Class name="AutorService" package="com.mza.biblioteca.servicios" visibility="public" xPosition="37.0" yPosition="229.0">
+      <Fields>
+        <Field name="aRepo" type="RepoAutor" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="creaAutor" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="buscaAutores" returnType="List&lt;Autor&gt;" visibility="public"/>
+        <Method name="buscaActivos" returnType="List&lt;Autor&gt;" visibility="public"/>
+        <Method name="buscaPorNombre" returnType="List&lt;Autor&gt;" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="buscaPorId" returnType="Autor" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="opcionalPorId" returnType="Optional&lt;Autor&gt;" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="borraAutor" returnType="void" visibility="public">
+          <Argument type="Autor" name="autor"/>
+        </Method>
+        <Method name="activaAutor" returnType="void" visibility="public">
+          <Argument type="Autor" name="autor"/>
+        </Method>
+        <Method name="validar" returnType="void" visibility="private">
+          <Argument type="String" name="nombre"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="EditorialService" package="com.mza.biblioteca.servicios" visibility="public" xPosition="544.0" yPosition="560.0">
+      <Fields>
+        <Field name="eRepo" type="RepoEditorial" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="creaEditorial" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="buscaEditoriales" returnType="List&lt;Editorial&gt;" visibility="public"/>
+        <Method name="buscaActivos" returnType="List&lt;Editorial&gt;" visibility="public"/>
+        <Method name="buscaPorNombre" returnType="Editorial" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="buscaPorId" returnType="Editorial" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="opcionalPorId" returnType="Optional&lt;Editorial&gt;" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="borraEditorial" returnType="void" visibility="public">
+          <Argument type="Editorial" name="editorial"/>
+        </Method>
+        <Method name="activaEditorial" returnType="void" visibility="public">
+          <Argument type="Editorial" name="editorial"/>
+        </Method>
+        <Method name="validar" returnType="void" visibility="private">
+          <Argument type="String" name="nombre"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="LibroService" package="com.mza.biblioteca.servicios" visibility="public" xPosition="83.0" yPosition="560.0">
+      <Fields>
+        <Field name="rLibro" type="RepoLibro" visibility="private"/>
+        <Field name="sAutor" type="AutorService" visibility="private"/>
+        <Field name="sEditorial" type="EditorialService" visibility="private"/>
+        <Field name="sPortada" type="PortadaService" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="creaLibro" returnType="void" visibility="public">
+          <Argument type="MultipartFile" name="archivo"/>
+          <Argument type="Libro" name="libro"/>
+        </Method>
+        <Method name="editaLibro" returnType="void" visibility="public">
+          <Argument type="MultipartFile" name="archivo"/>
+          <Argument type="Libro" name="editado"/>
+        </Method>
+        <Method name="buscarPorId" returnType="Libro" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="listaLibro" returnType="List&lt;Libro&gt;" visibility="public"/>
+        <Method name="listaActivos" returnType="List&lt;Libro&gt;" visibility="public"/>
+        <Method name="listaBuscada" returnType="List&lt;Libro&gt;" visibility="public">
+          <Argument type="String" name="buscar"/>
+        </Method>
+        <Method name="listaBuscadaActivos" returnType="List&lt;Libro&gt;" visibility="public">
+          <Argument type="String" name="buscar"/>
+        </Method>
+        <Method name="bajaLibro" returnType="void" visibility="public">
+          <Argument type="Libro" name="libro"/>
+        </Method>
+        <Method name="altaLibro" returnType="void" visibility="public">
+          <Argument type="Libro" name="libro"/>
+        </Method>
+        <Method name="validar" returnType="Libro" visibility="private">
+          <Argument type="Libro" name="libro"/>
+        </Method>
+        <Method name="validarCambios" returnType="Libro" visibility="private">
+          <Argument type="Libro" name="editado"/>
+          <Argument type="Libro" name="persistido"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PortadaService" package="com.mza.biblioteca.servicios" visibility="public" xPosition="345.0" yPosition="182.0">
+      <Fields>
+        <Field name="rPortada" type="RepoPortada" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="guardar" returnType="Portada" visibility="public">
+          <Argument type="MultipartFile" name="archivo"/>
+        </Method>
+        <Method name="actualizar" returnType="Portada" visibility="public">
+          <Argument type="String" name="idFoto"/>
+          <Argument type="MultipartFile" name="archivo"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="PrestamoService" package="com.mza.biblioteca.servicios" visibility="public" xPosition="850.0" yPosition="801.0">
+      <Fields>
+        <Field name="sLibro" type="LibroService" visibility="package"/>
+        <Field name="sUsuario" type="UsuarioService" visibility="package"/>
+        <Field name="rPrestamo" type="RepoPrestamo" visibility="package"/>
+        <Field name="rUsuario" type="RepoUsuario" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="creaPrestamo" returnType="Prestamo" visibility="public">
+          <Argument type="String" name="idLibro"/>
+          <Argument type="String" name="idUsuario"/>
+        </Method>
+        <Method name="confirmaPrestamo" returnType="void" visibility="public">
+          <Argument type="Prestamo" name="prestamo"/>
+        </Method>
+        <Method name="listaPrestamos" returnType="List&lt;Prestamo&gt;" visibility="public"/>
+        <Method name="sumarRestarDiasFecha" returnType="Date" visibility="private">
+          <Argument type="Date" name="fecha"/>
+          <Argument type="int" name="dias"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="UsuarioService" package="com.mza.biblioteca.servicios" visibility="public" xPosition="850.0" yPosition="109.0">
+      <Fields>
+        <Field name="rUsuario" type="RepoUsuario" visibility="package"/>
+        <Field name="sFoto" type="PortadaService" visibility="package"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="registrar" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+          <Argument type="String" name="email"/>
+          <Argument type="String" name="clave"/>
+          <Argument type="String" name="clave2"/>
+        </Method>
+        <Method name="modificar" returnType="void" visibility="public">
+          <Argument type="String" name="id"/>
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+          <Argument type="String" name="mail"/>
+          <Argument type="String" name="clave"/>
+          <Argument type="String" name="clave2"/>
+        </Method>
+        <Method name="deshabilitar" returnType="void" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="habilitar" returnType="void" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="cambiarRol" returnType="void" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="loadUserByUsername" returnType="UserDetails" visibility="public">
+          <Argument type="String" name="mail"/>
+        </Method>
+        <Method name="buscarPorId" returnType="Usuario" visibility="public">
+          <Argument type="String" name="id"/>
+        </Method>
+        <Method name="todosLosUsuarios" returnType="List&lt;Usuario&gt;" visibility="public"/>
+        <Method name="usuariosActivos" returnType="List&lt;Usuario&gt;" visibility="public"/>
+        <Method name="validar" returnType="void" visibility="public">
+          <Argument type="String" name="nombre"/>
+          <Argument type="String" name="apellido"/>
+          <Argument type="String" name="email"/>
+          <Argument type="String" name="clave"/>
+          <Argument type="String" name="clave2"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="RepoAutor" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Methods>
+        <Method name="buscaPorNombre" returnType="List&lt;Autor&gt;" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="buscaActivos" returnType="List&lt;Autor&gt;" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Interface name="RepoEditorial" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="546.0" yPosition="375.0">
+      <Methods>
+        <Method name="buscaPorNombre" returnType="Editorial" visibility="public">
+          <Argument type="String" name="nombre"/>
+        </Method>
+        <Method name="buscaActivos" returnType="List&lt;Editorial&gt;" visibility="public"/>
+      </Methods>
+    </Interface>
+    <Interface name="RepoLibro" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="108.0" yPosition="993.0">
+      <Methods>
+        <Method name="buscaActivos" returnType="List&lt;Libro&gt;" visibility="package">
+          <Argument type="String" name="buscar"/>
+        </Method>
+        <Method name="buscaTodo" returnType="List&lt;Libro&gt;" visibility="package">
+          <Argument type="String" name="buscar"/>
+        </Method>
+        <Method name="listaActivos" returnType="List&lt;Libro&gt;" visibility="package"/>
+        <Method name="validaISBN" returnType="Optional&lt;Libro&gt;" visibility="package">
+          <Argument type="String" name="isbn"/>
+        </Method>
+      </Methods>
+    </Interface>
+    <Interface name="RepoPortada" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="427.0" yPosition="20.0">
+      <Methods/>
+    </Interface>
+    <Interface name="RepoPrestamo" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="1317.0" yPosition="882.0">
+      <Methods/>
+    </Interface>
+    <Interface name="RepoUsuario" package="com.mza.biblioteca.repositorios" visibility="public" xPosition="1130.0" yPosition="597.0">
+      <Methods>
+        <Method name="buscarPorMail" returnType="Usuario" visibility="public">
+          <Argument type="String" name="mail"/>
+        </Method>
+        <Method name="validaMail" returnType="Optional&lt;Usuario&gt;" visibility="public">
+          <Argument type="String" name="mail"/>
+        </Method>
+        <Method name="buscaActivos" returnType="List&lt;Usuario&gt;" visibility="public"/>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="rUsuario" source="com.mza.biblioteca.servicios.UsuarioService" target="com.mza.biblioteca.repositorios.RepoUsuario" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sFoto" source="com.mza.biblioteca.servicios.UsuarioService" target="com.mza.biblioteca.servicios.PortadaService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="aRepo" source="com.mza.biblioteca.servicios.AutorService" target="com.mza.biblioteca.repositorios.RepoAutor" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sUsuario" source="com.mza.biblioteca.servicios.PrestamoService" target="com.mza.biblioteca.servicios.UsuarioService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="eRepo" source="com.mza.biblioteca.servicios.EditorialService" target="com.mza.biblioteca.repositorios.RepoEditorial" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sEditorial" source="com.mza.biblioteca.servicios.LibroService" target="com.mza.biblioteca.servicios.EditorialService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="rUsuario" source="com.mza.biblioteca.servicios.PrestamoService" target="com.mza.biblioteca.repositorios.RepoUsuario" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sAutor" source="com.mza.biblioteca.servicios.LibroService" target="com.mza.biblioteca.servicios.AutorService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sLibro" source="com.mza.biblioteca.servicios.PrestamoService" target="com.mza.biblioteca.servicios.LibroService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="rLibro" source="com.mza.biblioteca.servicios.LibroService" target="com.mza.biblioteca.repositorios.RepoLibro" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="sPortada" source="com.mza.biblioteca.servicios.LibroService" target="com.mza.biblioteca.servicios.PortadaService" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="rPrestamo" source="com.mza.biblioteca.servicios.PrestamoService" target="com.mza.biblioteca.repositorios.RepoPrestamo" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="rPortada" source="com.mza.biblioteca.servicios.PortadaService" target="com.mza.biblioteca.repositorios.RepoPortada" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
