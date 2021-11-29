@@ -12,8 +12,10 @@ import com.mza.biblioteca.excepciones.MiExcepcion;
 import com.mza.biblioteca.servicios.AutorService;
 import com.mza.biblioteca.servicios.EditorialService;
 import com.mza.biblioteca.servicios.LibroService;
+
 import java.util.List;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -23,7 +25,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
- *
  * @author Adrian E. Camus
  */
 @Controller
@@ -42,18 +43,16 @@ public class LibroController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/registroLibro")
-    public String registro(ModelMap modelo, 
-                           HttpSession session, 
+    public String registro(ModelMap modelo,
+                           HttpSession session,
                            @RequestParam(required = false) String id) {
 
-        if (id != null)
-        {
+        if (id != null) {
             modelo.addAttribute("libro", sLibro.buscarPorId(id));
             return "redirect:/libros/lista";
-        } else
-        {
+        } else {
             Libro aux = new Libro();
-            System.out.println("ACA ESTOY EN EL GET Y MANDO "+aux.getId());
+            System.out.println("ACA ESTOY EN EL GET Y MANDO " + aux.getId());
             aux.setAlta(Boolean.TRUE);
             aux.setTitulo("Ingrese el título del Libro");
             aux.setSinopsis("Ingrese un resumen del libro, breve y general");
@@ -82,14 +81,12 @@ public class LibroController {
                            @ModelAttribute Libro libro,
                            @RequestParam(required = false) MultipartFile archivo) {
 
-        try
-        {
+        try {
             sLibro.creaLibro(archivo, libro);
             modelo.put("exito", "Registro Exitoso");
             return "redirect:/libros/lista";
 
-        } catch (MiExcepcion e)
-        {
+        } catch (MiExcepcion e) {
             modelo.put("error", e.getMessage());
             return "nLibro";
         }
@@ -97,12 +94,12 @@ public class LibroController {
     }
 
     @GetMapping("/modificar")
-    public String modificarLibro(ModelMap modelo, 
-                                HttpSession session, 
-                                @RequestParam String id) throws MiExcepcion {
+    public String modificarLibro(ModelMap modelo,
+                                 HttpSession session,
+                                 @RequestParam String id) throws MiExcepcion {
         Libro libro = sLibro.buscarPorId(id);
 
-        if(libro == null){
+        if (libro == null) {
             throw new MiExcepcion("No se puede asignar el archivo a ese ID");
         }
 
@@ -123,26 +120,23 @@ public class LibroController {
     public String editar(ModelMap modelo,
                          RedirectAttributes redirectAttributes,
                          @ModelAttribute Libro libro,
-                         @RequestParam(required = false) MultipartFile archivo){
-            try
-            {
-                sLibro.editaLibro(archivo, libro);
-                modelo.put("exito", "El Libro se modificó correctamente");
-                return "redirect:/libros/lista";
+                         @RequestParam(required = false) MultipartFile archivo) {
+        try {
+            sLibro.editaLibro(archivo, libro);
+            modelo.put("exito", "El Libro se modificó correctamente");
+            return "redirect:/libros/lista";
 
-            } catch (MiExcepcion e)
-            {
-                modelo.put("error", e.getMessage());
-                return "modLibro";
-            }
+        } catch (MiExcepcion e) {
+            modelo.put("error", e.getMessage());
+            return "modLibro";
+        }
     }
 
     @GetMapping("/lista")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     public String listaLibros(ModelMap modelo, HttpSession session, @RequestParam(required = false) String buscar) {
         //si el parametro "buscar" NO es nulo, agrega al modelo una lista de libros buscados
-        if (buscar != null)
-        {
+        if (buscar != null) {
             modelo.addAttribute("libros", sLibro.listaBuscada(buscar));
 
         } else //si no viene parametro de busqueda, agrega al modelo una lista con todos los libros
@@ -154,10 +148,9 @@ public class LibroController {
 
     @GetMapping("/vista")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
-    public String libro (ModelMap modelo, HttpSession session, @RequestParam(required = false) String buscar) throws MiExcepcion {
+    public String libro(ModelMap modelo, HttpSession session, @RequestParam(required = false) String buscar) throws MiExcepcion {
         //si el parametro "buscar" NO es nulo, agrega al modelo una lista de libros buscados activos
-        if (buscar != null)
-        {
+        if (buscar != null) {
             modelo.addAttribute("libros", sLibro.listaBuscadaActivos(buscar));
 
         } else //si no viene parametro de busqueda, agrega al modelo una lista con todos los libros activos
@@ -170,9 +163,8 @@ public class LibroController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/borrar")
     public String borrarLibro(ModelMap modelo, @RequestParam String id) {
-        
-        if (id != null)
-        {
+
+        if (id != null) {
             modelo.addAttribute("libro", sLibro.buscarPorId(id));
         }
         return "bLibro";
@@ -183,14 +175,12 @@ public class LibroController {
     @PostMapping("/borrar")
     public String borrarLibro(ModelMap modelo, RedirectAttributes redirectAttributes, @ModelAttribute Libro libro) {
 
-        try
-        {
+        try {
             sLibro.bajaLibro(libro);
             modelo.put("exito", "El libro se dio de baja");
             //return "redirect:/libros/lista";
             return "bLibro";
-        } catch (MiExcepcion e)
-        {
+        } catch (MiExcepcion e) {
             modelo.put("error", "NO SE BORRO EL LIBRO");
             return "bLibro";
         }
@@ -200,9 +190,8 @@ public class LibroController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/activar")
     public String activarLibro(ModelMap modelo, HttpSession session, @RequestParam(required = false) String id) {
-        
-        if (id != null)
-        {
+
+        if (id != null) {
             modelo.addAttribute("libro", sLibro.buscarPorId(id));
             return "aLibro";
         }
@@ -213,18 +202,16 @@ public class LibroController {
     @PostMapping("/activar")
     public String activarLibro(ModelMap modelo, RedirectAttributes redirectAttributes, @ModelAttribute Libro libro) {
 
-        try
-        {
+        try {
             sLibro.altaLibro(libro);
             modelo.put("exito", "El libro activo correctamente");
             //return "redirect:/libros/lista";
             return "aLibro";
-        } catch (MiExcepcion e)
-        {
+        } catch (MiExcepcion e) {
             modelo.put("error", "NO SE BORRO EL LIBRO");
             return "aLibro";
         }
 
     }
-    
+
 }

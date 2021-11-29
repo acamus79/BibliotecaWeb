@@ -13,7 +13,6 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.format.annotation.DateTimeFormat;
 
 /**
- *
  * @author Adrian E. Camus
  */
 @Entity
@@ -21,7 +20,8 @@ public class Prestamo implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2") @Column(length = 36)
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(length = 36)
     private String id;
 
     private Boolean alta;
@@ -32,9 +32,9 @@ public class Prestamo implements Serializable {
     @ManyToOne
     private Libro libro;
 
-    
+
     @Temporal(TemporalType.TIMESTAMP)
-    @DateTimeFormat(pattern="dd-MMM-YYYY")
+    @DateTimeFormat(pattern = "dd-MMM-YYYY")
     private Date prestamo;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -124,5 +124,5 @@ public class Prestamo implements Serializable {
         this.devolucion = devolucion;
     }
 
-   
+
 }

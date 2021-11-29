@@ -12,10 +12,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- *
  * @author Adrian E. Camus
  */
 @Entity
@@ -23,19 +23,20 @@ public class Editorial {
 
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2") @Column(length = 36)
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(length = 36)
     private String id;
-    
+
     @Column(unique = true)
     private String nombre;
-    
+
     private Boolean alta;
-    
+
 //    @OneToMany(mappedBy = "editorial")
 //    private List<Libro> libros;
 
     //CONSTRUCTORES
-   
+
     //GETTERS & SETTERS
 
     /**

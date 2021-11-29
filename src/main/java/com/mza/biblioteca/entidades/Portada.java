@@ -11,20 +11,22 @@ import javax.persistence.*;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * 
  * @author Adrian E. Camus
  */
 @Entity
 public class Portada {
 
-    @Id @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2") @Column(length = 36)
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(length = 36)
     private String id;
-    
+
     private String nombre;
     private String mime;
-    
-    @Lob @Basic(fetch = FetchType.LAZY)
+
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
     private byte[] contenido;
 
     public String getId() {
@@ -58,5 +60,5 @@ public class Portada {
     public void setContenido(byte[] contenido) {
         this.contenido = contenido;
     }
-        
+
 }

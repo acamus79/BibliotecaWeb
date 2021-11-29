@@ -7,7 +7,6 @@
 package com.mza.biblioteca.excepciones;
 
 /**
- * 
  * @author Adrian E. Camus
  */
 public class MiExcepcion extends Exception {
@@ -15,7 +14,7 @@ public class MiExcepcion extends Exception {
     public MiExcepcion() {
     }
 
-    public MiExcepcion (String mensaje){
+    public MiExcepcion(String mensaje) {
         super(mensaje);
     }
 }

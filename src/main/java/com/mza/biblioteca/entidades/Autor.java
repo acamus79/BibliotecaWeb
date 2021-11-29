@@ -7,10 +7,10 @@ package com.mza.biblioteca.entidades;
 
 
 import javax.persistence.*;
+
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- *
  * @author Adrian E. Camus
  */
 @Entity
@@ -18,16 +18,17 @@ public class Autor {
 
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2") @Column(length = 36)
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(length = 36)
     private String id;
-    
+
     @Column(unique = true)
     private String nombre;
 
     private Boolean alta;
 
     //CONSTRUCTORES
-   
+
     //GETTERS & SETTERS
 
     /**

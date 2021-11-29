@@ -10,12 +10,13 @@ import com.mza.biblioteca.excepciones.MiExcepcion;
 import com.mza.biblioteca.repositorios.RepoAutor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
  * @author Adrian E. Camus
  */
 @Service
@@ -54,37 +55,34 @@ public class AutorService {
     @Transactional(readOnly = true)
     public Autor buscaPorId(String id) {
         Optional<Autor> optional = aRepo.findById(id);
-        
-        if (optional.isPresent())
-        {
+
+        if (optional.isPresent()) {
             return optional.get();
-        }else{
+        } else {
             return null;
-        }            
-        
+        }
+
     }
-    
+
     @Transactional(readOnly = true)
     public Optional<Autor> opcionalPorId(String id) {
         return aRepo.findById(id);
     }
-    
+
     @Transactional
-    public void borraAutor (Autor autor) throws MiExcepcion {
+    public void borraAutor(Autor autor) throws MiExcepcion {
         Optional<Autor> op = aRepo.findById(autor.getId());
-        if (op.isPresent())
-        {
+        if (op.isPresent()) {
             Autor aux = op.get();
             aux.setAlta(Boolean.FALSE);
             aRepo.save(aux);
         }
     }
-    
+
     @Transactional
-    public void activaAutor (Autor autor) throws MiExcepcion {
+    public void activaAutor(Autor autor) throws MiExcepcion {
         Optional<Autor> op = aRepo.findById(autor.getId());
-        if (op.isPresent())
-        {
+        if (op.isPresent()) {
             Autor aux = op.get();
             aux.setAlta(Boolean.TRUE);
             aRepo.save(aux);
@@ -93,8 +91,7 @@ public class AutorService {
 
     private void validar(String nombre) throws MiExcepcion {
 
-        if (nombre.isEmpty() || nombre == null)
-        {
+        if (nombre.isEmpty() || nombre == null) {
             throw new MiExcepcion("Nombre no valido");
         }
 

@@ -7,7 +7,6 @@
 package com.mza.biblioteca.enumeradores;
 
 /**
- * 
  * @author Adrian E. Camus
  */
 

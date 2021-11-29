@@ -11,10 +11,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- *
  * @author Adrian E. Camus
  */
 @Entity
@@ -22,13 +22,14 @@ public class Libro {
 
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2") @Column(length = 36)
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(length = 36)
     private String id;
-    
+
     @Column(unique = true)
     private String isbn;
-    
-    
+
+
     private String titulo;
     private String sinopsis;
     private Integer anio;
@@ -41,12 +42,12 @@ public class Libro {
     private Autor autor;
     @ManyToOne
     private Editorial editorial;
-    
+
     @OneToOne
     private Portada portada;
 
     //CONSTRUCTORES
-   
+
     //GETTERS & SETTERS
 
     /**
@@ -217,5 +218,5 @@ public class Libro {
         this.portada = portada;
     }
 
-    
+
 }

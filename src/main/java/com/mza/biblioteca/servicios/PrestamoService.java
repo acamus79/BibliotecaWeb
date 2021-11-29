@@ -11,18 +11,17 @@ import com.mza.biblioteca.entidades.Usuario;
 import com.mza.biblioteca.excepciones.MiExcepcion;
 import com.mza.biblioteca.repositorios.RepoPrestamo;
 import com.mza.biblioteca.repositorios.RepoUsuario;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
-
-
 /**
- *
  * @author Adrian E. Camus
  */
 
@@ -46,22 +45,18 @@ public class PrestamoService {
 
         Libro libroPrestado = new Libro();
         Usuario usuario = new Usuario();
-        try
-        {
+        try {
             libroPrestado = sLibro.buscarPorId(idLibro);
             usuario = sUsuario.buscarPorId(idUsuario);
-        } catch (Exception e)
-        {
-            throw new MiExcepcion("No se pudo crear el prestamo: "+ e.getMessage());
+        } catch (Exception e) {
+            throw new MiExcepcion("No se pudo crear el prestamo: " + e.getMessage());
         }
 
         //Verifico que existan ejemplares disponibles para realizar el prestamo
-        if (libroPrestado.getEjemplaresRestantes() > 0 && libroPrestado.getAlta())
-        {
+        if (libroPrestado.getEjemplaresRestantes() > 0 && libroPrestado.getAlta()) {
             libroPrestado.setEjemplaresRestantes(libroPrestado.getEjemplaresRestantes() - 1);
             libroPrestado.setEjemplaresPrestados(libroPrestado.getEjemplaresPrestados() + 1);
-        } else
-        {
+        } else {
             throw new MiExcepcion("No se puede prestar el Libro, no quedan ejemplares disponibles");
         }
         //creo un nuevo prestamo y le seteo atributos
@@ -76,37 +71,35 @@ public class PrestamoService {
         usuario.setCantidadPrestamos(usuario.getCantidadPrestamos() + 1);
         rPrestamo.save(prestamo);
         rUsuario.save(prestamo.getUsuario());
-        
+
         return prestamo;
     }
 
     @Transactional
     public void confirmaPrestamo(Prestamo prestamo) throws MiExcepcion {
-        try
-        {
+        try {
             rPrestamo.save(prestamo);
             rUsuario.save(prestamo.getUsuario());
-        } catch (Exception e)
-        {
-            throw new MiExcepcion("No se pudo confirmar el prestamo: "+ e.getMessage());
+        } catch (Exception e) {
+            throw new MiExcepcion("No se pudo confirmar el prestamo: " + e.getMessage());
         }
-        
+
     }
 
     @Transactional(readOnly = true)
     public List<Prestamo> listaPrestamos() throws MiExcepcion {
         return rPrestamo.findAll();
     }
-    
+
     // Suma los días recibidos a la fecha  
-    private Date sumarRestarDiasFecha(Date fecha, int dias){
+    private Date sumarRestarDiasFecha(Date fecha, int dias) {
 
-      Calendar calendar = Calendar.getInstance();
+        Calendar calendar = Calendar.getInstance();
 
-      calendar.setTime(fecha); // Configuramos la fecha que se recibe
+        calendar.setTime(fecha); // Configuramos la fecha que se recibe
 
-      calendar.add(Calendar.DAY_OF_YEAR, dias);  // numero de días a añadir, o restar en caso de días<0
-      return calendar.getTime(); // Devuelve el objeto Date con los nuevos días añadidos
- }
+        calendar.add(Calendar.DAY_OF_YEAR, dias);  // numero de días a añadir, o restar en caso de días<0
+        return calendar.getTime(); // Devuelve el objeto Date con los nuevos días añadidos
+    }
 
 }

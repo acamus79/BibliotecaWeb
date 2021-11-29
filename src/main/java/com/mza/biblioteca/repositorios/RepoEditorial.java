@@ -15,11 +15,10 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 /**
- * 
  * @author Adrian E. Camus
  */
 @Repository
-public interface RepoEditorial extends JpaRepository<Editorial, String>{
+public interface RepoEditorial extends JpaRepository<Editorial, String> {
 
     @Query("SELECT e FROM Editorial e WHERE e.nombre = :nombre")
     public Editorial buscaPorNombre(@Param("nombre") String nombre);

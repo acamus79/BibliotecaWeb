@@ -8,8 +8,10 @@ package com.mza.biblioteca.controladores;
 import com.mza.biblioteca.entidades.Autor;
 import com.mza.biblioteca.excepciones.MiExcepcion;
 import com.mza.biblioteca.servicios.AutorService;
+
 import java.util.Objects;
 import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -23,7 +25,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 /**
- *
  * @author Adrian E. Camus
  */
 @Controller
@@ -35,19 +36,18 @@ public class AutorController {
     AutorService autorServicio;
 
     @GetMapping("/registroAutor")
-    public String formulario() { return "nAutor.html";
+    public String formulario() {
+        return "nAutor.html";
     }
 
     @PostMapping("/registroAutor")
     public String registro(ModelMap modelo, @RequestParam String nombre) {
 
-        try
-        {
+        try {
             autorServicio.creaAutor(nombre);
             modelo.put("exito", "Registro Exitoso");
             return "nAutor";
-        } catch (MiExcepcion e)
-        {
+        } catch (MiExcepcion e) {
             modelo.put("error", "Ya existe un Autor con ese Nombre");
             return "nAutor";
         }
@@ -59,8 +59,7 @@ public class AutorController {
     public String listaAutores(ModelMap modelo, @RequestParam(required = false) String buscar) {
 
         //si el parametro "buscar" NO es nulo, agrega al modelo una lista de Autores buscados
-        if (buscar != null)
-        {
+        if (buscar != null) {
             modelo.addAttribute("autores", autorServicio.buscaPorNombre(buscar));
         } else //si no viene parametro de busqueda, agrega al modelo una lista con todos los Autores
         {
@@ -73,18 +72,14 @@ public class AutorController {
     @GetMapping("/borrar")
     public String borrarAutor(ModelMap modelo, @RequestParam(required = false) String id) {
 
-        if (id != null)
-        {
+        if (id != null) {
             Optional<Autor> optional = autorServicio.opcionalPorId(id);
-            if (optional.isPresent())
-            {
+            if (optional.isPresent()) {
                 modelo.addAttribute("autor", optional.get());
-            } else
-            {
+            } else {
                 return "redirect:/autores/lista";
             }
-        } else
-        {
+        } else {
             return "bAutor";
         }
         return "bAutor";
@@ -94,14 +89,12 @@ public class AutorController {
     @PostMapping("/borrar")
     public String borrarAutor(ModelMap modelo, RedirectAttributes redirectAttributes, @ModelAttribute Autor autor) {
 
-        try
-        {
+        try {
             autorServicio.borraAutor(autor);
             modelo.put("exito", "Se Modifico el estado del Autor correctamente");
             return "redirect:/autores/lista";
 
-        } catch (MiExcepcion e)
-        {
+        } catch (MiExcepcion e) {
             modelo.put("error", "NO SE BORRO EL AUTOR");
             return "bAutor";
         }
@@ -112,18 +105,14 @@ public class AutorController {
     @GetMapping("/activar")
     public String activarAutor(ModelMap modelo, @RequestParam(required = false) String id) {
 
-        if (id != null)
-        {
+        if (id != null) {
             Optional<Autor> optional = autorServicio.opcionalPorId(id);
-            if (optional.isPresent())
-            {
+            if (optional.isPresent()) {
                 modelo.addAttribute("autor", optional.get());
-            } else
-            {
+            } else {
                 return "redirect:/autores/lista";
             }
-        } else
-        {
+        } else {
             return "aAutor";
         }
         return "aAutor";
@@ -133,14 +122,12 @@ public class AutorController {
     @PostMapping("/activar")
     public String activarAutor(ModelMap modelo, RedirectAttributes redirectAttributes, @ModelAttribute Autor autor) {
 
-        try
-        {
+        try {
             autorServicio.activaAutor(autor);
             modelo.put("exito", "El Autor se activo correctamente");
             return "aAutor";
 
-        } catch (MiExcepcion e)
-        {
+        } catch (MiExcepcion e) {
             modelo.put("error", "NO SE ACTIVO EL AUTOR");
             return "aAutor";
         }

@@ -9,11 +9,13 @@ import com.mza.biblioteca.entidades.Usuario;
 import com.mza.biblioteca.enumeradores.Rol;
 import com.mza.biblioteca.excepciones.MiExcepcion;
 import com.mza.biblioteca.repositorios.RepoUsuario;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -28,7 +30,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 /**
- *
  * @author Adrian E. Camus
  */
 @Service
@@ -68,8 +69,7 @@ public class UsuarioService implements UserDetailsService {
         validar(nombre, apellido, mail, clave, clave2);
 
         Optional<Usuario> respuesta = rUsuario.findById(id);
-        if (respuesta.isPresent())
-        {
+        if (respuesta.isPresent()) {
             Usuario usuario = respuesta.get();
             usuario.setApellido(apellido);
             usuario.setNombre(nombre);
@@ -78,8 +78,7 @@ public class UsuarioService implements UserDetailsService {
             usuario.setClave(encriptada);
 
             rUsuario.save(usuario);
-        } else
-        {
+        } else {
 
             throw new MiExcepcion("No se encontró el usuario solicitado");
         }
@@ -90,13 +89,11 @@ public class UsuarioService implements UserDetailsService {
     public void deshabilitar(String id) throws MiExcepcion {
 
         Optional<Usuario> respuesta = rUsuario.findById(id);
-        if (respuesta.isPresent())
-        {
+        if (respuesta.isPresent()) {
             Usuario usuario = respuesta.get();
             usuario.setBaja(new Date());
             rUsuario.save(usuario);
-        } else
-        {
+        } else {
 
             throw new MiExcepcion("No se encontró el usuario solicitado");
         }
@@ -107,13 +104,11 @@ public class UsuarioService implements UserDetailsService {
     public void habilitar(String id) throws MiExcepcion {
 
         Optional<Usuario> respuesta = rUsuario.findById(id);
-        if (respuesta.isPresent())
-        {
+        if (respuesta.isPresent()) {
             Usuario usuario = respuesta.get();
             usuario.setBaja(null);
             rUsuario.save(usuario);
-        } else
-        {
+        } else {
 
             throw new MiExcepcion("No se encontró el usuario solicitado");
         }
@@ -125,16 +120,13 @@ public class UsuarioService implements UserDetailsService {
 
         Optional<Usuario> respuesta = rUsuario.findById(id);
 
-        if (respuesta.isPresent())
-        {
+        if (respuesta.isPresent()) {
 
             Usuario usuario = respuesta.get();
 
-            if (usuario.getRol().equals(Rol.USUARIO))
-            {
+            if (usuario.getRol().equals(Rol.USUARIO)) {
                 usuario.setRol(Rol.ADMIN);
-            } else if (usuario.getRol().equals(Rol.ADMIN))
-            {
+            } else if (usuario.getRol().equals(Rol.ADMIN)) {
                 usuario.setRol(Rol.USUARIO);
             }
         }
@@ -145,8 +137,7 @@ public class UsuarioService implements UserDetailsService {
 
         Usuario usuario = rUsuario.buscarPorMail(mail);
 
-        if (usuario != null)
-        {
+        if (usuario != null) {
             List<GrantedAuthority> permisos = new ArrayList<>();
 
             //Creo una lista de permisos! 
@@ -163,8 +154,7 @@ public class UsuarioService implements UserDetailsService {
 
             return user;
 
-        } else
-        {
+        } else {
             return null;
         }
     }
@@ -173,13 +163,11 @@ public class UsuarioService implements UserDetailsService {
     public Usuario buscarPorId(String id) throws MiExcepcion {
 
         Optional<Usuario> respuesta = rUsuario.findById(id);
-        if (respuesta.isPresent())
-        {
+        if (respuesta.isPresent()) {
 
             Usuario usuario = respuesta.get();
             return usuario;
-        } else
-        {
+        } else {
 
             throw new MiExcepcion("No se encontró el usuario solicitado");
         }
@@ -192,39 +180,33 @@ public class UsuarioService implements UserDetailsService {
     }
 
     @Transactional(readOnly = true)
-    public List<Usuario> usuariosActivos() throws MiExcepcion{
+    public List<Usuario> usuariosActivos() throws MiExcepcion {
         return rUsuario.buscaActivos();
     }
 
     public void validar(String nombre, String apellido, String email, String clave, String clave2) throws MiExcepcion {
         Optional<Usuario> op = rUsuario.validaMail(email);
 
-        if (nombre == null || nombre.isEmpty())
-        {
+        if (nombre == null || nombre.isEmpty()) {
             throw new MiExcepcion("El nombre del usuario no puede ser nulo");
         }
 
-        if (apellido == null || apellido.isEmpty())
-        {
+        if (apellido == null || apellido.isEmpty()) {
             throw new MiExcepcion("El apellido del usuario no puede ser nulo");
         }
 
-        if (email == null || email.isEmpty())
-        {
+        if (email == null || email.isEmpty()) {
             throw new MiExcepcion("El mail no puede ser nulo");
         }
 
-        if (op.isPresent())
-        {
+        if (op.isPresent()) {
             throw new MiExcepcion("La dirección e-mail indicada, ya se encuentra registrada");
         }
 
-        if (clave == null || clave.isEmpty() || clave.length() < 4)
-        {
+        if (clave == null || clave.isEmpty() || clave.length() < 4) {
             throw new MiExcepcion("La clave del usuario no puede ser nula y tiene que tener cuatro o más caracteres");
         }
-        if (!clave.equals(clave2))
-        {
+        if (!clave.equals(clave2)) {
             throw new MiExcepcion("Las claves deben ser iguales");
         }
 

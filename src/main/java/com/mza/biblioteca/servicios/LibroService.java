@@ -11,14 +11,15 @@ import com.mza.biblioteca.entidades.Portada;
 import com.mza.biblioteca.excepciones.MiExcepcion;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
+
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
- *
  * @author Adrian E. Camus
  */
 @Service
@@ -58,22 +59,19 @@ public class LibroService {
     @Transactional
     public void editaLibro(MultipartFile archivo, Libro editado) throws MiExcepcion {
 
-        try
-        {
+        try {
             //Remuevo espacios al principio y al final del título
             editado.setTitulo(editado.getTitulo().trim());
 
             //Valido los cambios entre los dos libros, el que viene por parametro y el que ya esta en la base
             Libro persistido = validarCambios(editado, buscarPorId(editado.getId()));
             //Si el Libro en la BD no tiene portada le seteeo al Libro Persistido una nueva portada con el archivo
-            if (archivo != null && !archivo.isEmpty())
-            {
+            if (archivo != null && !archivo.isEmpty()) {
                 persistido.setPortada(sPortada.guardar(archivo));
             }
             //Persistimos el libro en la base de datos
             rLibro.save(persistido);
-        } catch (MiExcepcion e)
-        {
+        } catch (MiExcepcion e) {
             throw new MiExcepcion("No se edito el Libro");
         }
 
@@ -82,11 +80,9 @@ public class LibroService {
     @Transactional(readOnly = true)
     public Libro buscarPorId(String id) {
         Optional<Libro> op = rLibro.findById(id);
-        if (op.isPresent())
-        {
+        if (op.isPresent()) {
             return op.get();
-        } else
-        {
+        } else {
             return null;
         }
     }
@@ -97,7 +93,7 @@ public class LibroService {
     }
 
     @Transactional(readOnly = true)
-    public List<Libro> listaActivos() throws MiExcepcion{
+    public List<Libro> listaActivos() throws MiExcepcion {
         return rLibro.listaActivos();
     }
 
@@ -115,8 +111,7 @@ public class LibroService {
     public void bajaLibro(Libro libro) throws MiExcepcion {
 
         Optional<Libro> op = rLibro.findById(libro.getId());
-        if (op.isPresent())
-        {
+        if (op.isPresent()) {
             Libro aux = op.get();
             aux.setAlta(Boolean.FALSE);
             rLibro.save(aux);
@@ -128,8 +123,7 @@ public class LibroService {
     public void altaLibro(Libro libro) throws MiExcepcion {
 
         Optional<Libro> op = rLibro.findById(libro.getId());
-        if (op.isPresent())
-        {
+        if (op.isPresent()) {
             Libro aux = op.get();
             aux.setAlta(Boolean.TRUE);
             rLibro.save(aux);
@@ -146,50 +140,39 @@ public class LibroService {
 
         //valido los atributos que son objetos de otra clase primero
         //para en caso de ser necesario usar tambien la busqueda por ID y asignar el objeto
-        if (libro.getAutor().toString().isEmpty() || libro.getAutor() == null)
-        {
+        if (libro.getAutor().toString().isEmpty() || libro.getAutor() == null) {
             throw new MiExcepcion("Autor no puede ser nulo");
-        } else
-        {
+        } else {
             libro.setAutor(sAutor.buscaPorId(libro.getAutor().getId()));
         }
 
-        if (libro.getEditorial().toString().isEmpty() || libro.getEditorial() == null)
-        {
+        if (libro.getEditorial().toString().isEmpty() || libro.getEditorial() == null) {
             throw new MiExcepcion("Editorial no valida");
-        } else
-        {
+        } else {
             libro.setEditorial(sEditorial.buscaPorId(libro.getEditorial().getId()));
         }
 
         //uso Optional para validar que no exista repetido un ISBN ya que es un atributo de tipo unico en mi entidad Libro
         Optional<Libro> op = rLibro.validaISBN(libro.getIsbn());
-        if (op.isPresent())
-        {
+        if (op.isPresent()) {
             throw new MiExcepcion("El ISBN indicado, ya se encuentra registrado");
-        } else if (libro.getIsbn().isEmpty() || libro.getIsbn() == null)
-        {
+        } else if (libro.getIsbn().isEmpty() || libro.getIsbn() == null) {
             throw new MiExcepcion("ISBN no valido");
-        } else if (libro.getIsbn().length() < 10)
-        {
+        } else if (libro.getIsbn().length() < 10) {
             throw new MiExcepcion("El ISBN no puede tener menos de 10 dígitos");
         }
 
-        if (libro.getTitulo().isEmpty() || libro.getTitulo() == null)
-        {
+        if (libro.getTitulo().isEmpty() || libro.getTitulo() == null) {
             throw new MiExcepcion("Titulo no valido");
         }
 
-        if (libro.getAnio().toString().length() != 4 || libro.getAnio() == null)
-        {
+        if (libro.getAnio().toString().length() != 4 || libro.getAnio() == null) {
             throw new MiExcepcion("El Año no puede tener menos de cuatro caracteres");
-        } else if (libro.getAnio() < Calendar.YEAR)
-        {
+        } else if (libro.getAnio() < Calendar.YEAR) {
             throw new MiExcepcion("El Año no puede ser mayor al año actual");
         }
 
-        if (libro.getEjemplares() == null || libro.getEjemplares() < 1)
-        {
+        if (libro.getEjemplares() == null || libro.getEjemplares() < 1) {
             throw new MiExcepcion("Error en los Ejemplares");
         }
         return libro;
@@ -202,44 +185,36 @@ public class LibroService {
                 && editado.getEjemplares().equals(persistido.getEjemplares())
                 && editado.getSinopsis().equals(persistido.getSinopsis())
                 && editado.getEditorial().getId().equals(persistido.getEditorial().getId())
-                && editado.getAutor().getId().equals(persistido.getAutor().getId()))
-        {
+                && editado.getAutor().getId().equals(persistido.getAutor().getId())) {
             throw new MiExcepcion("No existen cambios para editar");
         }
 
         //La nueva cantidad de ejemplares no puede ser menor a la cantidad de ejemplares que están prestados
-        if (editado.getEjemplares() != null && editado.getEjemplares() < persistido.getEjemplaresPrestados())
-        {
+        if (editado.getEjemplares() != null && editado.getEjemplares() < persistido.getEjemplaresPrestados()) {
             throw new MiExcepcion("La cantidad de ejemplares no puede ser menor a " + persistido.getEjemplaresPrestados());
         }
 
         /*Si los parámetros del objeto editado son diferentes a los del objeto persistido
             setear los nuevos valores
             * */
-        if (!editado.getAutor().getId().equals(persistido.getAutor().getId()))
-        {
+        if (!editado.getAutor().getId().equals(persistido.getAutor().getId())) {
             persistido.setAutor(editado.getAutor());
         }
-        if (!editado.getEditorial().getId().equals(persistido.getEditorial().getId()))
-        {
+        if (!editado.getEditorial().getId().equals(persistido.getEditorial().getId())) {
             persistido.setEditorial(editado.getEditorial());
         }
-        if (!editado.getSinopsis().equals(persistido.getSinopsis()))
-        {
+        if (!editado.getSinopsis().equals(persistido.getSinopsis())) {
             if (!editado.getSinopsis().isEmpty()) {
                 persistido.setSinopsis(editado.getSinopsis());
             }
         }
-        if (editado.getEjemplares()!= null && !editado.getEjemplares().equals(persistido.getEjemplares()))
-        {
+        if (editado.getEjemplares() != null && !editado.getEjemplares().equals(persistido.getEjemplares())) {
             persistido.setEjemplares(editado.getEjemplares());
         }
-        if (editado.getAnio()!=null && !editado.getAnio().equals(persistido.getAnio()))
-        {
+        if (editado.getAnio() != null && !editado.getAnio().equals(persistido.getAnio())) {
             persistido.setAnio(editado.getAnio());
         }
-        if (!editado.getTitulo().isEmpty())
-        {
+        if (!editado.getTitulo().isEmpty()) {
             if (!editado.getTitulo().equals(persistido.getTitulo())) {
                 persistido.setTitulo(editado.getTitulo());
             }

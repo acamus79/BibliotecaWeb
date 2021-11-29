@@ -8,7 +8,9 @@ package com.mza.biblioteca.controladores;
 import com.mza.biblioteca.entidades.Usuario;
 import com.mza.biblioteca.excepciones.MiExcepcion;
 import com.mza.biblioteca.servicios.UsuarioService;
+
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -19,7 +21,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- *
  * @author Adrian E. Camus
  */
 @Controller
@@ -32,20 +33,17 @@ public class UsuarioController {
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @GetMapping("/editar-perfil")
     public String editarPerfil(HttpSession session,
-            ModelMap modelo,
-            @RequestParam String id) {
+                               ModelMap modelo,
+                               @RequestParam String id) {
         Usuario login = (Usuario) session.getAttribute("usuariosession");
-        if (login == null || !login.getId().equals(id))
-        {
+        if (login == null || !login.getId().equals(id)) {
             return "redirect:/";
         }
 
-        try
-        {
+        try {
             Usuario usuario = sUsuario.buscarPorId(id);
             modelo.addAttribute("perfil", usuario);
-        } catch (MiExcepcion e)
-        {
+        } catch (MiExcepcion e) {
             modelo.addAttribute("error", e.getMessage());
         }
         return "inicio.html";
@@ -53,27 +51,24 @@ public class UsuarioController {
 
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @PostMapping("/actualizar-perfil")
-    public String registrar(HttpSession session, ModelMap modelo, 
-            @RequestParam String id,
-            @RequestParam String nombre,
-            @RequestParam String apellido,
-            @RequestParam String mail,
-            @RequestParam String clave1,
-            @RequestParam String clave2) {
+    public String registrar(HttpSession session, ModelMap modelo,
+                            @RequestParam String id,
+                            @RequestParam String nombre,
+                            @RequestParam String apellido,
+                            @RequestParam String mail,
+                            @RequestParam String clave1,
+                            @RequestParam String clave2) {
         Usuario usuario = null;
-        try
-        {
+        try {
             Usuario login = (Usuario) session.getAttribute("usuariosession");
-            if (login == null || !login.getId().equals(id))
-            {
+            if (login == null || !login.getId().equals(id)) {
                 return "redirect:/inicio";
             }
             usuario = sUsuario.buscarPorId(id);
             sUsuario.modificar(id, nombre, apellido, mail, clave2, clave2);
             session.setAttribute("usuariosession", usuario);
 
-        } catch (MiExcepcion e)
-        {
+        } catch (MiExcepcion e) {
             modelo.put("error", e.getMessage());
             modelo.put("perfil", usuario);
             return "perfil.html";

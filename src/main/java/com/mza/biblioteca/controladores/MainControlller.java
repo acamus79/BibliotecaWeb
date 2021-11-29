@@ -3,8 +3,10 @@ package com.mza.biblioteca.controladores;
 import com.mza.biblioteca.entidades.Usuario;
 import com.mza.biblioteca.excepciones.MiExcepcion;
 import com.mza.biblioteca.servicios.UsuarioService;
+
 import java.util.List;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -15,35 +17,35 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class MainControlller {
-    
+
     @Autowired
     private UsuarioService sUsuario;
 
     @GetMapping("/")
-    public String index(ModelMap modelo) throws MiExcepcion{
+    public String index(ModelMap modelo) throws MiExcepcion {
         List<Usuario> usuariosActivos = sUsuario.usuariosActivos();
         //Recordar que utilizo el modelo, para viajar con la llave usuario al HTML la lista usuariosActivos
         modelo.addAttribute("usuarios", usuariosActivos);
         return "index.html";
     }
-    
+
     @GetMapping("/registro")
     public String registro() {
         return "nUsuario";
     }
 
     @PostMapping("/registro")
-    public String registrar(ModelMap modelo, 
-            @RequestParam String nombre, 
-            @RequestParam String apellido, 
-            @RequestParam String email, 
-            @RequestParam String clave1, 
-            @RequestParam String clave2) {
+    public String registrar(ModelMap modelo,
+                            @RequestParam String nombre,
+                            @RequestParam String apellido,
+                            @RequestParam String email,
+                            @RequestParam String clave1,
+                            @RequestParam String clave2) {
 
         try {
             sUsuario.registrar(nombre, apellido, email, clave1, clave2);
         } catch (MiExcepcion ex) {
-            
+
             modelo.put("error", ex.getMessage());
             modelo.put("nombre", nombre);
             modelo.put("apellido", apellido);
@@ -56,15 +58,15 @@ public class MainControlller {
         modelo.put("descripcion", "Tu usuario fue registrado correctamente");
         return "registro-exitoso";
     }
-    
+
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     @GetMapping("/inicio")
     public String inicio(ModelMap modelo, HttpSession session) {
-    	
-    	List<Usuario> usuarios = sUsuario.todosLosUsuarios();
-    	
-    	modelo.addAttribute("usuarios", usuarios);
-    	
+
+        List<Usuario> usuarios = sUsuario.todosLosUsuarios();
+
+        modelo.addAttribute("usuarios", usuarios);
+
         return "inicio.html";
     }
 
@@ -79,7 +81,5 @@ public class MainControlller {
         return "login.html";
     }
 
-    
-    
 
 }

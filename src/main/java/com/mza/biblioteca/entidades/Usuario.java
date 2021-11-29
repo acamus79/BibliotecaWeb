@@ -6,6 +6,7 @@
 package com.mza.biblioteca.entidades;
 
 import com.mza.biblioteca.enumeradores.Rol;
+
 import java.util.Date;
 import java.util.List;
 import javax.persistence.Column;
@@ -18,19 +19,21 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- *
  * @author Adrian E. Camus
  */
 @Entity
 public class Usuario {
 
-    @Id @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "uuid", strategy = "uuid2") @Column(length = 36)
+    @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
+    @Column(length = 36)
     private String id;
-    
+
     @Temporal(TemporalType.TIMESTAMP)
     private Date alta;
     @Temporal(TemporalType.TIMESTAMP)
@@ -43,16 +46,16 @@ public class Usuario {
     private String apellido;
     private String clave;
     private Integer cantidadPrestamos;
-    
+
     //hago que los email sean una columna con valores unicos en la base 
     //ya que se va a usar como variable de logeo, y para que no haya conflictos
     //de roles debe ser unica
     @Column(unique = true)
     private String mail;
-    
+
     @OneToMany(mappedBy = "usuario")
     private List<Prestamo> prestamos;
-    
+
 
     /**
      * @return the id
@@ -194,6 +197,5 @@ public class Usuario {
         this.cantidadPrestamos = cantidadPrestamos;
     }
 
-    
 
 }
