@@ -40,6 +40,14 @@ public class LibroController {
     @Autowired
     AutorService sAutor;
 
+    /**
+     * Método get que inyecta al modelo un objeto de tipo Libro con los atributos seteados y el formulario de creación de un nuevo Libro funciona como uno de edición del objeto en el modelo.
+     * Además inyecta una lista de autores y de editoriales para poder utilizarlos en la vista como una lista desplegable de selección
+     * @param modelo ModelMap
+     * @param session HttpSession
+     * @param id String
+     * @return nLibro.html
+     */
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/registroLibro")
     public String registro(ModelMap modelo,
@@ -51,7 +59,6 @@ public class LibroController {
             return "redirect:/libros/lista";
         } else {
             Libro aux = new Libro();
-            System.out.println("ACA ESTOY EN EL GET Y MANDO " + aux.getId());
             aux.setAlta(Boolean.TRUE);
             aux.setTitulo("Ingrese el título del Libro");
             aux.setSinopsis("Ingrese un resumen del libro, breve y general");
@@ -73,6 +80,14 @@ public class LibroController {
         return "nLibro";
     }
 
+    /**
+     * Método Post que recibe un modelo de un objeto Libro, e intenta persisitirlo mediante un método del Servicio
+     * @param modelo ModelMap
+     * @param redirectAttributes RedirectAttributes
+     * @param libro Libro
+     * @param archivo MultipartFile
+     * @return nLibro.html
+     */
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/registroLibro")
     public String registro(ModelMap modelo,
@@ -92,12 +107,21 @@ public class LibroController {
 
     }
 
+    /**
+     * Método get para modificar Libros, recibe un ID por parámetro y lo transforma en un objeto Libro mediante un método del servicio.
+     * Inyecta en el modelo objetos de tipo Lista con Autores y Editoriales
+     * @param modelo ModelMap
+     * @param session HttpSession
+     * @param id String
+     * @return modLibro.html
+     * @throws MiExcepcion e
+     */
     @GetMapping("/modificar")
     public String modificarLibro(ModelMap modelo,
                                  HttpSession session,
                                  @RequestParam String id) throws MiExcepcion {
-        Libro libro = sLibro.buscarPorId(id);
 
+        Libro libro = sLibro.buscarPorId(id);
         if (libro == null) {
             throw new MiExcepcion("No se puede asignar el archivo a ese ID");
         }
@@ -109,11 +133,19 @@ public class LibroController {
         modelo.put("editoriales", editoriales);
 
         //Inyectamos el Libro a modificar con sus atributos actuales
-        modelo.put("libro", sLibro.buscarPorId(id));
+        modelo.put("libro", libro);
 
         return "modLibro";
     }
 
+    /**
+     * Persiste mediante llamado a métodos del Servicio, los cambios en el Libro modificado
+     * @param modelo ModelMap
+     * @param redirectAttributes RedirectAttributes
+     * @param libro libro
+     * @param archivo MultipartFile
+     * @return modLibro.html
+     */
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/modificar")
     public String editar(ModelMap modelo,

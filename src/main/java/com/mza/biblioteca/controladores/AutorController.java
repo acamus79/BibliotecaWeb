@@ -29,12 +29,24 @@ public class AutorController {
     @Autowired
     AutorService autorServicio;
 
+    /**
+     * Método get para la creación de nuevos Autores
+     * @return nAutor.html
+     */
     @GetMapping("/registroAutor")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     public String formulario() {
         return "nAutor.html";
     }
 
+    /**
+     * Metodo Post para el registro de nuevos Objetos de la Entidad Autor
+     * @param modelo ModelMap
+     * @param nombre String
+     * @return nAutor.html
+     */
     @PostMapping("/registroAutor")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     public String registro(ModelMap modelo, @RequestParam String nombre) {
 
         try {
@@ -48,6 +60,12 @@ public class AutorController {
 
     }
 
+    /**
+     * Get para acceder a la lista de autores, puede recibir un parámetro de búsqueda
+     * @param modelo ModelMap
+     * @param buscar String
+     * @return autores.html
+     */
     @GetMapping("/lista")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     public String listaAutores(ModelMap modelo, @RequestParam(required = false) String buscar) {
@@ -62,6 +80,12 @@ public class AutorController {
         return "autores";
     }
 
+    /**
+     * Método GET para desactivar un autor, mediante un método de la clase AutorService, incluye un Objeto de tipo autor en el modelo
+     * @param modelo ModelMap
+     * @param id String
+     * @return bAutor.html
+     */
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/borrar")
     public String borrarAutor(ModelMap modelo, @RequestParam(required = false) String id) {
@@ -79,6 +103,13 @@ public class AutorController {
         return "bAutor";
     }
 
+    /**
+     * Método GET para desactivar un autor, recibe en el modelo un objeto de tipo Autor y mediante un método del servicio intenta desactivar el autor e incluye en el modelo un mensaje de éxito
+     * @param modelo ModelMap
+     * @param redirectAttributes RedirectAttributes
+     * @param autor Autor
+     * @return bAutor.html
+     */
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/borrar")
     public String borrarAutor(ModelMap modelo, RedirectAttributes redirectAttributes, @ModelAttribute Autor autor) {
@@ -95,6 +126,12 @@ public class AutorController {
 
     }
 
+    /**
+     * Método GET para activar un autor, mediante un método de la clase AutorService, incluye un Objeto de tipo autor en el modelo
+     * @param modelo ModelMap
+     * @param id String
+     * @return aAutor.html
+     */
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/activar")
     public String activarAutor(ModelMap modelo, @RequestParam(required = false) String id) {
@@ -112,6 +149,13 @@ public class AutorController {
         return "aAutor";
     }
 
+    /**
+     * Método GET para activar un autor, recibe en el modelo un objeto de tipo Autor y mediante un método del servicio intenta desactivar el autor e incluye en el modelo un mensaje de éxito
+     * @param modelo ModelMap
+     * @param redirectAttributes RedirectAttributes
+     * @param autor Autor
+     * @return aAutor.html
+     */
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/activar")
     public String activarAutor(ModelMap modelo, RedirectAttributes redirectAttributes, @ModelAttribute Autor autor) {
@@ -127,6 +171,5 @@ public class AutorController {
         }
 
     }
-
 
 }
