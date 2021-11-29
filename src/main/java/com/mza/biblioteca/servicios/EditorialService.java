@@ -6,19 +6,15 @@
 
 package com.mza.biblioteca.servicios;
 
-import com.mza.biblioteca.entidades.Autor;
 import com.mza.biblioteca.entidades.Editorial;
-import com.mza.biblioteca.entidades.Libro;
 import com.mza.biblioteca.excepciones.MiExcepcion;
 import com.mza.biblioteca.repositorios.RepoEditorial;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @author Adrian E. Camus

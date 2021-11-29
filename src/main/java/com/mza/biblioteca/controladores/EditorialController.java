@@ -6,20 +6,18 @@
 
 package com.mza.biblioteca.controladores;
 
-import com.mza.biblioteca.entidades.Autor;
 import com.mza.biblioteca.entidades.Editorial;
 import com.mza.biblioteca.excepciones.MiExcepcion;
 import com.mza.biblioteca.servicios.EditorialService;
-
-import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
+import java.util.Optional;
 
 /**
  * @author Adrian E. Camus

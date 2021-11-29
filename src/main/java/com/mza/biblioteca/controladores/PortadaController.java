@@ -3,11 +3,6 @@ package com.mza.biblioteca.controladores;
 import com.mza.biblioteca.entidades.Libro;
 import com.mza.biblioteca.excepciones.MiExcepcion;
 import com.mza.biblioteca.servicios.LibroService;
-
-import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -18,6 +13,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/portada")
