@@ -20,6 +20,12 @@ public class MainControlller {
     @Autowired
     private UsuarioService sUsuario;
 
+    /**
+     * Get de ingreso principal, utiliza un modelo para agregar una lista con todos los usuarios activos
+     * @param modelo ModelMap
+     * @return index.html
+     * @throws MiExcepcion e
+     */
     @GetMapping("/")
     public String index(ModelMap modelo) throws MiExcepcion {
         List<Usuario> usuariosActivos = sUsuario.usuariosActivos();
