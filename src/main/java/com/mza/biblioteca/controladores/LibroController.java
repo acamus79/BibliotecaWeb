@@ -163,6 +163,15 @@ public class LibroController {
         }
     }
 
+    /**
+     * Get para llenar con una lista el modelo y poder recorrer y mostrar para renderizar una lista en la vista
+     * se sirve de dos métodos para crear la lista en caso de que el parámetro buscar exista o no, como esta lista
+     * solo la puede ver un usuario de Rol ADMIN trae todos los libros no importa el estado en que se encuentre
+     * @param modelo ModelMap
+     * @param session HttpSession
+     * @param buscar String
+     * @return listalibros.html
+     */
     @GetMapping("/lista")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     public String listaLibros(ModelMap modelo, HttpSession session, @RequestParam(required = false) String buscar) {
@@ -177,6 +186,16 @@ public class LibroController {
         return "listalibros";
     }
 
+    /**
+     * Get para llenar con una lista el modelo y poder recorrer y mostrar para renderizar una lista en la vista
+     * se sirve de dos métodos para crear la lista en caso de que el parámetro buscar exista o no, como esta
+     * lista es accesible a los usuarios trae solo los libros activos y que posean ejemplares restantes
+     * @param modelo ModelMap
+     * @param session HttpSession
+     * @param buscar String
+     * @return libros.html
+     * @throws MiExcepcion e
+     */
     @GetMapping("/vista")
     @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_USUARIO')")
     public String libro(ModelMap modelo, HttpSession session, @RequestParam(required = false) String buscar) throws MiExcepcion {
@@ -191,6 +210,12 @@ public class LibroController {
         return "libros";
     }
 
+    /**
+     * Get que mediante un String ID agrega al modelo un objeto Libro valiéndose un método del servicio
+     * @param modelo ModelMap
+     * @param id String
+     * @return bLibro.html
+     */
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/borrar")
     public String borrarLibro(ModelMap modelo, @RequestParam String id) {
@@ -202,6 +227,14 @@ public class LibroController {
 
     }
 
+    /**
+     * Método POST que recibe el modelo de objeto agregado en el GET e intenta, dar de baja el Libro
+     * mediante un método del servicio.
+     * @param modelo ModelMap
+     * @param redirectAttributes RedirectAttributes
+     * @param libro Libro
+     * @return bLibro.html
+     */
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/borrar")
     public String borrarLibro(ModelMap modelo, RedirectAttributes redirectAttributes, @ModelAttribute Libro libro) {
@@ -218,6 +251,12 @@ public class LibroController {
 
     }
 
+    /**
+     * Get que mediante un String ID agrega al modelo un objeto Libro valiéndose un método del servicio
+     * @param modelo ModelMap
+     * @param id String
+     * @return bLibro.html
+     */
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @GetMapping("/activar")
     public String activarLibro(ModelMap modelo, HttpSession session, @RequestParam(required = false) String id) {
@@ -229,6 +268,14 @@ public class LibroController {
         return "aLibro";
     }
 
+    /**
+     * Método POST que recibe el modelo de objeto agregado en el GET e intenta, dar de alta el Libro
+     * mediante un método del servicio.
+     * @param modelo ModelMap
+     * @param redirectAttributes RedirectAttributes
+     * @param libro Libro
+     * @return bLibro.html
+     */
     @PreAuthorize("hasAnyRole('ROLE_ADMIN')")
     @PostMapping("/activar")
     public String activarLibro(ModelMap modelo, RedirectAttributes redirectAttributes, @ModelAttribute Libro libro) {
