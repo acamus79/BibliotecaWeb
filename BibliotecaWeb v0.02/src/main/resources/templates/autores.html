@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es-AR" xmlns:th="https://www.thymeleaf.org">
+  <head th:replace="/fragments/head :: head"></head>
+    <body>
+      <header class="masthead2">
+        <nav th:replace="/fragments/navbar :: nav"></nav>
+        <div class="container m-auto">
+          <div th:if="${exito}!=null" class="card text-white bg-success mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Exito</h5>
+              <p class="card-text" th:text="${exito}"></p>
+            </div>
+          </div>
+          <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+            <div class="card-body">
+              <h5 class="card-title">Error</h5>
+              <p class="card-text" th:text="${error}"></p>
+            </div>
+          </div>
+        </div>
+      </header>
+      <div class="container">
+        <div class="card mt-3">
+            <div class="card-header d-flex">
+                <h1>Lista de Autores Registrados</h1>
+            </div>
+            <div class="card-body">
+                <form class="row g-3" th:action="@{/autores/lista}" method="post">
+                    <div class="col">
+                        <input type="text" style="width: 100%;" name="buscar" placeholder="Buscar...">
+                    </div>
+                    <div class="col-3">
+                        <button type="submit" class="btn btn-dark mb-3 p-2">Buscar</button>
+                        <a sec:authorize="hasRole('ADMIN')" th:href="@{/autores/registroAutor}" class="btn btn-primary mb-3 p-2">NUEVO AUTOR</a>
+                    </div>
+                </form>
+                <table class="table table-dark table-striped">
+                    <thead>
+                        <tr>
+                            <th>N°</th>
+                            <th>Nombre</th>
+                            <th sec:authorize="hasRole('ADMIN')">Estado</th>
+                            <th sec:authorize="hasRole('ADMIN')">Administracion</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each=" a,iterator : ${autores}">
+                            <td th:text="${iterator.index+1}"></td>
+                            <td th:text="${a.nombre}"></td>
+                            <td sec:authorize="hasRole('ADMIN')">
+                              <span th:if="${a.alta}" style="color: chartreuse;"><p>Activo</p></span>
+                              <span th:unless="${a.alta}" style="color:brown;"><p>Baja</p></span>
+                            </td>
+                            <!-- <td sec:authorize="hasRole('ADMIN')" th:text="${a.alta} == true ? 'Activo' : 'Baja'"> -->
+                            <!--<td>
+                              <i th:if="${autor.alta}" class="fa fa-circle text-success"></i> -->
+                              <!-- <i th:if="${autor.alta}" class="fas fa-check text-success"></i>
+                              <i th:unless="${autor.alta}" class="fa fa-ban" style="color:red;"></i>
+                            </td> -->
+                            <!-- <td>
+                              <a th:href="@{/autor/alta/_${autor.id}_}"><i class="fa fa-arrow-up"></i></a>
+                              <a th:href="@{/autor/baja/_${autor.id}_}"><i class="fa fa-ban"></i></a>
+                            </td> -->
+                            <td sec:authorize="hasRole('ADMIN')">
+                              <a th:if="${a.alta} == true" class="mx-2" th:href="@{/autores/borrar}+'?id='+${a.id}"><i class="fa fa-ban" style="color:brown;"></i></a>
+                              <a th:if="${a.alta} == false" class="mx-2" th:href="@{/autores/activar}+'?id='+${a.id}"><i class="fas fa-arrow-up" style="color: chartreuse;"></i></a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <p th:if="${autores.isEmpty}">No hay Autores para mostrar</p>
+                </table>
+            </div>
+        </div>
+    </div>
+    <section th:replace="/fragments/btnFooters :: section"></section>
+    <!-- Footer-->
+    <footer th:replace="/fragments/footer :: footer"></footer>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+  </body>
+</html>
+

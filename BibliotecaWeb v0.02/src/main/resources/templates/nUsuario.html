@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="es-AR" xmlns:th="https://www.thymeleaf.org">
+    <head th:replace="/fragments/head :: head"></head>
+    <body>
+      <header class="masthead2">
+        <nav th:replace="/fragments/navbar :: nav"></nav>
+            <div class="container px-4 px-lg-5 d-flex h-100-items-center justify-content-center">
+                <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                    <div class="card-body">
+                      <h5 class="card-title">Error al Registrar el Usuario</h5>
+                      <p class="card-text" th:text="${error}"></p>
+                    </div>
+                </div>
+            </div>
+        </header>    
+            <section class="registro-section bg-light text-center">
+                <div class="container px-4 px-lg-4">
+                <img class="img-fluid" src="img/user.png" width="60" alt="...">
+                    <div class="row gx-3 gx-lg-4 justify-content-center">
+                        <div class="col-lg-13">
+                            <h2 class="mx-auto my-0 text-dark-80">Intentemos de Nuevo</h2>
+                                <form th:action="@{/registro}" method="post">
+                                    <section class="py-2 text-center container">
+                                        <div class="col-lg-9 col-md-2 mx-auto">
+                                          <div class="row py-lg-2">
+                                            <div class="form-group col-md-4">
+                                              <label class="text-dark-60 mb-1">NOMBRE</label>
+                                              <input
+                                                type="text"
+                                                class="form-control"
+                                                name="nombre"
+                                                placeholder="Ingrese Nombre/s"
+                                                required
+                                              />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                              <label class="text-dark-60 mb-1">APELLIDO</label>
+                                              <input
+                                                type="text"
+                                                class="form-control"
+                                                name="apellido"
+                                                placeholder="Ingrese Apellido/s"
+                                                required
+                                              />
+                                            </div>
+                                            <div class="form-group col-md-4">
+                                              <label class="text-dark-60 mb-1">E-MAIL</label>
+                                              <input
+                                                type="email"
+                                                class="form-control"
+                                                name="email"
+                                                placeholder="Ingrese un e-mail"
+                                              />
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </section>
+                                      <section class="py-2 text-center container">
+                                        <div class="col-lg-9 col-md-2 mx-auto">
+                                          <div class="row py-lg-2">
+                                            <div class="form-group col-md-6">
+                                              <label class="text-dark-60 mb-1">CONTRASEÑA</label>
+                                              <input
+                                                type="password"
+                                                class="form-control"
+                                                name="clave1"
+                                                placeholder="Debe contener 4 caracteres o más"
+                                                required
+                                              />
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                              <label class="text-dark-60 mb-1">REPETIR CONTRASEÑA</label>
+                                              <input
+                                                type="password"
+                                                class="form-control"
+                                                name="clave2"
+                                                placeholder="Repita la Contraseña"
+                                                required
+                                              />
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </section>
+                                      <br />
+                                      <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-user-check"></i> REGISTRARSE
+                                      </button>
+                                    <br />
+                                <br />
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        <!-- Pie de Página -->
+        <footer th:replace="/fragments/footer :: footer"></footer>
+    </body>
+</html>
+
+
+
