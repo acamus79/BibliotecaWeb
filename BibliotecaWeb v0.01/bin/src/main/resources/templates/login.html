@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es-AR" xmlns:th="https://www.thymeleaf.org">
+<head th:replace="/fragments/head :: head"></head>
+    <body>
+        <header class="masthead2 text-center">
+            <nav th:replace="/fragments/navbar :: nav"></nav>
+            <!-- <h5 th:if="${error != null}" th:text="${error}" style="color:red"></h5>
+            <h5 th:if="${logout != null}" th:text="${logout}" style="color:greenyellow"></h5> -->
+            <div class="container m-auto">
+                <div th:if="${exito}!=null" class="card text-white bg-success mb-3">
+                    <div class="card-body">
+                    <h5 class="card-text" th:text="${exito}"></h5>
+                    </div>
+                </div>
+                <div th:if="${error}!=null" class="card text-white bg-danger mb-3">
+                    <div class="card-body">
+                    <h5 class="card-text" th:text="${error}"></h5>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="about-section text-center">
+            <div class="container px-5 px-lg-8">
+                <div class="row gx-5 gx-lg-8 justify-content-center">
+                    <div class="col-lg-6">
+                        
+                        <h2 class="text-white-50">INGRESO</h2>
+<!-- en el formulario de logeo utilizo la accion logincheck los nombres de los input deben ser username y password -->
+                    <form action="/logincheck" method="POST">
+                        
+                        <section class="text-center container">
+                            <div class="form-group">
+                                <label class="text-white mb-1">USUARIO</label>
+                                <input type="email" class="form-control" name="username" placeholder="Ingrese email" required/>
+                            </div>
+                        </section>
+                <section class="py-2 text-center container">
+                    <div class="form-group">
+                        <label class="text-white mb-1">CONTRASEÑA</label>
+                        <input type="password" class="form-control" name="password" required/>
+                    </div>
+                </section>
+                <br>
+                <button type="submit" class="btn btn-primary"><i class="fas fa-user-check"></i> INGRESAR</button>
+        </form>
+            <br>
+            <br>
+        </section>
+
+        <!-- Pie de Página -->
+        <footer th:replace="/fragments/footer :: footer"></footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    </body>
+</html>
