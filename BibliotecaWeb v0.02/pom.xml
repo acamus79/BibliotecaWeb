@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.mza</groupId>
 	<artifactId>biblioteca</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1-HEROKU</version>
 	<name>BibliotecaWeb</name>
 	<description>Ejercicio 01 última guia de curso fullstack EGG</description>
 	<properties>
@@ -97,5 +97,5 @@
                 </plugin>
 		</plugins>
 	</build>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
 </project>
